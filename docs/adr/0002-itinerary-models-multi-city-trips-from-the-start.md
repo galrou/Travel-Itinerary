@@ -1,0 +1,3 @@
+# Itinerary is structured as Trip → Leg → Day, not a flat Day list
+
+The original spec only described a single destination city, and a flat `Itinerary = ordered Days` would have been the simpler model. We decided to build in multi-city support from the start: a Trip is an ordered sequence of Legs, each with its own Hotel and own Days, and Travel Days can be anchored by a generic Transit Point (not just an Airport) for inter-Leg movement. A single-city trip is just a Trip with one Leg. We chose this over the flatter model because retrofitting a Leg layer underneath an already-shipped flat Day list would touch Sequencing, Requirements-gathering, and Budget-floor search all at once — the cost of adding it later is much higher than the cost of carrying one extra layer now.

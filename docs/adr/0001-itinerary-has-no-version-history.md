@@ -1,0 +1,3 @@
+# Itinerary is a single evolving object, not a versioned Plan
+
+The spec requires a Checkpointer so users can give follow-up feedback ("swap lunch for a cafe") without repeating Requirements, which raised the question of whether the Itinerary needs its own version history independent of the Checkpointer. We decided against it: there is no "Plan" wrapper object, and no product need to undo or diff past versions was identified. Feedback mutates the one Itinerary in place, and the Checkpointer's role is limited to carrying state across conversation turns. If undo/diff becomes a real requirement later, this will need to be revisited — it is not a change that falls out for free.
