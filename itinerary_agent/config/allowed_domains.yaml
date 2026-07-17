@@ -1,0 +1,12 @@
+categories:
+  Activities:
+    domains:
+      - tripadvisor.com
+      - lonelyplanet.com
+      - viator.com
+      - atlasobscura.com
+  Restaurants/Reviews:
+    domains:
+      - yelp.com
+      - opentable.com
+      - thefork.com
