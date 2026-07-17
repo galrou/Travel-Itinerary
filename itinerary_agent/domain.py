@@ -1,0 +1,46 @@
+from dataclasses import dataclass, field
+
+from itinerary_agent.models import Location
+
+SLOT_NAMES: tuple[str, ...] = ("breakfast", "morning", "lunch", "afternoon", "dinner", "evening")
+ACTIVITY_SLOTS: tuple[str, ...] = ("morning", "afternoon", "evening")
+MEAL_SLOTS: tuple[str, ...] = ("breakfast", "lunch", "dinner")
+
+
+@dataclass(frozen=True)
+class Activity:
+    id: str
+    name: str
+    location: Location
+    price: float
+    source_domain: str
+    review_signal: float
+
+
+@dataclass(frozen=True)
+class Hotel:
+    name: str
+    location: Location
+
+
+@dataclass
+class Day:
+    slots: dict[str, Activity | None] = field(default_factory=lambda: {name: None for name in SLOT_NAMES})
+
+
+@dataclass
+class Leg:
+    destination: str
+    hotel: Hotel
+    days: list[Day] = field(default_factory=list)
+
+
+@dataclass
+class Trip:
+    legs: list[Leg]
+    party_size: int
+    budget: float
+    arrival_airport: str
+    arrival_time: str
+    departure_airport: str
+    departure_time: str
