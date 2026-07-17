@@ -7,6 +7,19 @@ from itinerary_agent.research import ActivityResearchResult
 
 
 @dataclass
+class FakeLLMClient:
+    """An LLMClient test double: returns a scripted response regardless of
+    input. Used to unit-test LLMRequirementsExtractor itself, distinct from
+    ScriptedExtractor which fakes the whole RequirementsExtractor seam for
+    graph-level tests."""
+
+    response: str = "{}"
+
+    def complete(self, *, system: str, user: str) -> str:
+        return self.response
+
+
+@dataclass
 class ScriptedExtractor:
     """A RequirementsExtractor test double: looks up the exact message text
     in a script rather than actually parsing natural language."""
