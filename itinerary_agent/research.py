@@ -1,3 +1,14 @@
+"""ActivityResearcher and RestaurantResearcher are the LLM-backed seam for
+turning allowed-domain Source content into structured candidates: the real
+implementation reads raw page/review content and extracts fields like
+review_signal by judgment, not just structured-API passthrough. No real
+implementation exists yet — tests mock these with fixed fakes (see
+tests/itinerary_agent/fakes.py::FixtureResearcher / FixtureRestaurantResearcher).
+
+Future consideration: retrieval over a pre-indexed allowed-domain corpus
+(RAG) is a candidate implementation strategy alongside live per-request
+agentic browsing — not decided yet."""
+
 from dataclasses import dataclass
 from typing import Protocol, Sequence
 
