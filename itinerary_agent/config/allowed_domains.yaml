@@ -5,3 +5,8 @@ categories:
       - lonelyplanet.com
       - viator.com
       - atlasobscura.com
+  Restaurants/Reviews:
+    domains:
+      - yelp.com
+      - opentable.com
+      - thefork.com

@@ -11,6 +11,13 @@ class Requirements:
     arrival_time: str | None = None
     departure_airport: str | None = None
     departure_time: str | None = None
+    breakfast_opt_in: bool | None = None
+    lunch_opt_in: bool | None = None
+    dinner_opt_in: bool | None = None
+    restaurant_cuisine: str | None = None
+    restaurant_dietary: str | None = None
+    restaurant_price_tier: str | None = None
+    named_restaurant: str | None = None
 
 
 _REQUIREMENT_GROUPS: tuple[tuple[str, tuple[str, ...]], ...] = (
@@ -19,6 +26,10 @@ _REQUIREMENT_GROUPS: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("budget", ("budget",)),
     ("arrival airport and time", ("arrival_airport", "arrival_time")),
     ("departure airport and time", ("departure_airport", "departure_time")),
+    (
+        "restaurant preferences for breakfast/lunch/dinner",
+        ("breakfast_opt_in", "lunch_opt_in", "dinner_opt_in"),
+    ),
 )
 
 

@@ -1,6 +1,7 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Sequence
 
+from itinerary_agent.domain import Restaurant
 from itinerary_agent.requirements import Requirements
 from itinerary_agent.research import ActivityResearchResult
 
@@ -25,3 +26,14 @@ class FixtureResearcher:
 
     def research(self, destination: str, hotel: str, allowed_domains: Sequence[str]) -> ActivityResearchResult:
         return self.result
+
+
+@dataclass
+class FixtureRestaurantResearcher:
+    """A RestaurantResearcher test double standing in for the
+    Restaurants/Reviews Source Category's fixture data."""
+
+    candidates: list[Restaurant] = field(default_factory=list)
+
+    def research(self, destination: str, hotel: str, allowed_domains: Sequence[str]) -> list[Restaurant]:
+        return self.candidates

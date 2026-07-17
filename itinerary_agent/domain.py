@@ -18,6 +18,16 @@ class Activity:
 
 
 @dataclass(frozen=True)
+class Restaurant(Activity):
+    """A specialized Activity that fills a meal Slot, ranked additionally by
+    cuisine/dietary/price-tier preference match (see restaurants.py)."""
+
+    cuisine: str = ""
+    dietary_tags: tuple[str, ...] = ()
+    price_tier: str = ""
+
+
+@dataclass(frozen=True)
 class Hotel:
     name: str
     location: Location

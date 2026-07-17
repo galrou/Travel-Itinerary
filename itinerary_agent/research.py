@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Protocol, Sequence
 
-from itinerary_agent.domain import Activity
+from itinerary_agent.domain import Activity, Restaurant
 from itinerary_agent.models import Location
 
 
@@ -15,6 +15,16 @@ class ActivityResearcher(Protocol):
     def research(
         self, destination: str, hotel: str, allowed_domains: Sequence[str]
     ) -> ActivityResearchResult: ...
+
+
+class RestaurantResearcher(Protocol):
+    def research(
+        self, destination: str, hotel: str, allowed_domains: Sequence[str]
+    ) -> list[Restaurant]:
+        """No anchor to return: the Hotel location already comes from
+        ActivityResearcher, and Restaurant ranking anchors on the Day's
+        other Activities instead (see restaurants.rank_restaurants)."""
+        ...
 
 
 def filter_by_allowed_domains(
