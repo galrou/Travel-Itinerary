@@ -12,6 +12,15 @@ def test_load_allowed_domains_reads_the_activities_category_from_config():
     assert all(isinstance(domain, str) for domain in activities_domains)
 
 
+def test_load_allowed_domains_reads_the_restaurants_reviews_category_independently_of_activities():
+    allowed = load_allowed_domains()
+
+    restaurant_domains = allowed.domains_for("Restaurants/Reviews")
+
+    assert len(restaurant_domains) > 0
+    assert set(restaurant_domains).isdisjoint(allowed.domains_for("Activities"))
+
+
 def test_domains_for_an_unknown_category_is_empty():
     allowed = AllowedDomainsList(categories={"Activities": SourceCategory(name="Activities", domains=("a.com",))})
 

@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from typing import Literal
 
 from itinerary_agent.models import Location
 
-SLOT_NAMES: tuple[str, ...] = ("breakfast", "morning", "lunch", "afternoon", "dinner", "evening")
-ACTIVITY_SLOTS: tuple[str, ...] = ("morning", "afternoon", "evening")
-MEAL_SLOTS: tuple[str, ...] = ("breakfast", "lunch", "dinner")
+Slot = Literal["breakfast", "morning", "lunch", "afternoon", "dinner", "evening"]
+
+SLOT_NAMES: tuple[Slot, ...] = ("breakfast", "morning", "lunch", "afternoon", "dinner", "evening")
+ACTIVITY_SLOTS: tuple[Slot, ...] = ("morning", "afternoon", "evening")
+MEAL_SLOTS: tuple[Slot, ...] = ("breakfast", "lunch", "dinner")
 
 
 @dataclass(frozen=True)
@@ -18,6 +21,16 @@ class Activity:
 
 
 @dataclass(frozen=True)
+class Restaurant(Activity):
+    """A specialized Activity that fills a meal Slot, ranked additionally by
+    cuisine/dietary/price-tier preference match (see restaurants.py)."""
+
+    cuisine: str = ""
+    dietary_tags: tuple[str, ...] = ()
+    price_tier: str = ""
+
+
+@dataclass(frozen=True)
 class Hotel:
     name: str
     location: Location
@@ -25,7 +38,7 @@ class Hotel:
 
 @dataclass
 class Day:
-    slots: dict[str, Activity | None] = field(default_factory=lambda: {name: None for name in SLOT_NAMES})
+    slots: dict[Slot, Activity | None] = field(default_factory=lambda: {name: None for name in SLOT_NAMES})
 
 
 @dataclass
