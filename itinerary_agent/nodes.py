@@ -2,7 +2,7 @@ from typing import Sequence
 
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage
 
-from itinerary_agent.domain import ACTIVITY_SLOTS, MEAL_SLOTS, SLOT_NAMES, Activity, Day, Hotel, Leg, Trip
+from itinerary_agent.domain import ACTIVITY_SLOTS, MEAL_SLOTS, SLOT_NAMES, Activity, Day, Hotel, Leg, Slot, Trip
 from itinerary_agent.extraction import RequirementsExtractor
 from itinerary_agent.models import Candidate
 from itinerary_agent.requirements import Requirements, is_complete, merge_requirements, missing_requirements
@@ -94,12 +94,12 @@ def make_sequencing_node():
     return sequencing_node
 
 
-def _filled_slots(day: Day, slots: Sequence[str]) -> list[tuple[str, Activity]]:
+def _filled_slots(day: Day, slots: Sequence[Slot]) -> list[tuple[Slot, Activity]]:
     return [(slot, activity) for slot in slots if (activity := day.slots[slot]) is not None]
 
 
-def _opted_in_meal_slots(requirements: Requirements) -> list[str]:
-    opt_in_by_slot = {
+def _opted_in_meal_slots(requirements: Requirements) -> list[Slot]:
+    opt_in_by_slot: dict[Slot, bool | None] = {
         "breakfast": requirements.breakfast_opt_in,
         "lunch": requirements.lunch_opt_in,
         "dinner": requirements.dinner_opt_in,

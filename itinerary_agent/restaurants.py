@@ -2,7 +2,7 @@ import math
 from dataclasses import dataclass
 from typing import Sequence
 
-from itinerary_agent.domain import Restaurant
+from itinerary_agent.domain import Restaurant, Slot
 from itinerary_agent.models import Location
 
 
@@ -65,14 +65,14 @@ def rank_restaurants(
 def assign_restaurants_to_slots(
     candidates: Sequence[Restaurant],
     preferences: RestaurantPreferences,
-    opted_in_slots: Sequence[str],
+    opted_in_slots: Sequence[Slot],
     nearby_activity_locations: Sequence[Location],
-) -> dict[str, Restaurant]:
+) -> dict[Slot, Restaurant]:
     """Fills only the opted-in meal Slots, each with a distinct Restaurant
     drawn from the ranked candidates; a slot is left unfilled if candidates
     run out before every opted-in slot has one."""
     ranked = rank_restaurants(candidates, preferences, nearby_activity_locations)
-    assignment: dict[str, Restaurant] = {}
+    assignment: dict[Slot, Restaurant] = {}
     used_ids: set[str] = set()
     for slot in opted_in_slots:
         for restaurant in ranked:
