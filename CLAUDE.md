@@ -11,3 +11,7 @@ Default canonical labels: `needs-triage`, `needs-info`, `ready-for-agent`, `read
 ### Domain docs
 
 Single-context — root `CONTEXT.md` + `docs/adr/`. See `docs/agents/domain.md`.
+
+### Python conventions
+
+Constants placement, package `__init__.py` re-exports, folder layering, `src/` layout, type-hint style. See `docs/agents/python-conventions.md`.

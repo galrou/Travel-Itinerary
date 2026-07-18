@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Sequence
 
-from itinerary_agent.models import Candidate
+from itinerary_agent.domain import Candidate
 
 
 @dataclass(frozen=True)

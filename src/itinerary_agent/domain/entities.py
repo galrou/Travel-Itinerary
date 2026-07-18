@@ -1,13 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Literal
+from typing import Sequence
 
-from itinerary_agent.models import Location
-
-Slot = Literal["breakfast", "morning", "lunch", "afternoon", "dinner", "evening"]
-
-SLOT_NAMES: tuple[Slot, ...] = ("breakfast", "morning", "lunch", "afternoon", "dinner", "evening")
-ACTIVITY_SLOTS: tuple[Slot, ...] = ("morning", "afternoon", "evening")
-MEAL_SLOTS: tuple[Slot, ...] = ("breakfast", "lunch", "dinner")
+from itinerary_agent.domain.constants import SLOT_NAMES, Slot
+from itinerary_agent.domain.models import Location
 
 
 @dataclass(frozen=True)
@@ -39,6 +34,9 @@ class Hotel:
 @dataclass
 class Day:
     slots: dict[Slot, Activity | None] = field(default_factory=lambda: {name: None for name in SLOT_NAMES})
+
+    def filled_slots(self, slots: Sequence[Slot] = SLOT_NAMES) -> list[tuple[Slot, Activity]]:
+        return [(slot, activity) for slot in slots if (activity := self.slots[slot]) is not None]
 
 
 @dataclass

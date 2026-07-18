@@ -1,5 +1,5 @@
-from itinerary_agent.budget_floor import find_budget_floor
-from itinerary_agent.models import Candidate, Location
+from itinerary_agent.domain import Candidate, Location
+from itinerary_agent.planning import find_budget_floor
 
 ANYWHERE = Location(lat=0, lon=0)
 

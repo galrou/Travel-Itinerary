@@ -20,6 +20,9 @@ lets pause
 The day-by-day activity schedule that is the agent's actual deliverable — an ordered sequence of Legs, each containing an ordered list of Days. It is a single evolving object per conversation: follow-up feedback mutates it in place rather than producing a new version.
 _Avoid_: Plan (use Itinerary — there is no separate "Plan" object; it's the same thing)
 
+**Feedback**:
+A traveler's follow-up free-text request after an Itinerary already exists (e.g. "swap lunch for a cafe"), resolved to a specific Slot plus a replacement intent — never a full re-description of the trip. Distinct from Requirements: Requirements describes trip logistics before research starts; Feedback edits an already-built Itinerary in place (see ADR-0001 — no version history, the one Itinerary is mutated directly).
+
 **Day**:
 One calendar day within a Leg, structured as a fixed sequence of meal-anchored Slots (e.g. breakfast, morning activity, lunch, afternoon activity, dinner, evening activity). Every Slot is filled by exactly one Activity, which is what makes a targeted edit like "swap lunch for a cafe" meaningful.
 

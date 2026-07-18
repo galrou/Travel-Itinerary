@@ -1,9 +1,10 @@
-import json
-from dataclasses import dataclass, fields
+from dataclasses import dataclass
 from typing import Protocol
 
-from itinerary_agent.llm import LLMClient
-from itinerary_agent.requirements import Requirements
+from pydantic import ValidationError
+
+from itinerary_agent.domain import Requirements
+from itinerary_agent.llm.client import LLMClient
 
 
 class RequirementsExtractor(Protocol):
@@ -17,7 +18,7 @@ class RequirementsExtractor(Protocol):
         ...
 
 
-_REQUIREMENTS_FIELDS = tuple(field.name for field in fields(Requirements))
+_REQUIREMENTS_FIELDS = tuple(Requirements.model_fields)
 
 _SYSTEM_PROMPT = (
     "You extract trip-planning details from a traveler's message. "
@@ -34,7 +35,7 @@ class LLMRequirementsExtractor:
     Requirements fields are readable out of the message, leaving the rest
     None. A malformed or unparseable response degrades to Requirements()
     rather than raising, matching this seam's missing-value-safe contract
-    (see requirements.merge_requirements/missing_requirements)."""
+    (see Requirements.merged_with/missing)."""
 
     llm: LLMClient
 
@@ -45,14 +46,6 @@ class LLMRequirementsExtractor:
 
 def _parse_requirements(raw: str) -> Requirements:
     try:
-        data = json.loads(raw)
-    except json.JSONDecodeError:
-        return Requirements()
-    if not isinstance(data, dict):
-        return Requirements()
-    known_fields = set(_REQUIREMENTS_FIELDS)
-    filtered = {key: value for key, value in data.items() if key in known_fields}
-    try:
-        return Requirements(**filtered)
-    except TypeError:
+        return Requirements.model_validate_json(raw)
+    except ValidationError:
         return Requirements()

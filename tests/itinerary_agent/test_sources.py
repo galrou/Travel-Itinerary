@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from itinerary_agent.sources import AllowedDomainsList, SourceCategory, load_allowed_domains
+from itinerary_agent.config import AllowedDomainsList, SourceCategory, load_allowed_domains
 
 
 def test_load_allowed_domains_reads_the_activities_category_from_config():

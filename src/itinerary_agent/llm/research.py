@@ -12,8 +12,7 @@ agentic browsing — not decided yet."""
 from dataclasses import dataclass
 from typing import Protocol, Sequence
 
-from itinerary_agent.domain import Activity, Restaurant
-from itinerary_agent.models import Location
+from itinerary_agent.domain import Activity, Location, Restaurant
 
 
 @dataclass(frozen=True)
@@ -34,7 +33,7 @@ class RestaurantResearcher(Protocol):
     ) -> list[Restaurant]:
         """No anchor to return: the Hotel location already comes from
         ActivityResearcher, and Restaurant ranking anchors on the Day's
-        other Activities instead (see restaurants.rank_restaurants)."""
+        other Activities instead (see restaurants.RestaurantRanker.rank)."""
         ...
 
 

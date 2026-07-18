@@ -1,5 +1,5 @@
-from itinerary_agent.models import Candidate, Location
-from itinerary_agent.sequencing import sequence_route
+from itinerary_agent.domain import Candidate, Location
+from itinerary_agent.planning import sequence_route
 
 
 def _square_candidates() -> tuple[Candidate, Candidate, Candidate]:
