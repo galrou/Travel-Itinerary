@@ -3,7 +3,7 @@ from pathlib import Path
 
 import yaml
 
-DEFAULT_CONFIG_PATH = Path(__file__).parent / "config" / "allowed_domains.yaml"
+DEFAULT_CONFIG_PATH = Path(__file__).parent / "allowed_domains.yaml"
 
 
 @dataclass(frozen=True)

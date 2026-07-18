@@ -4,12 +4,10 @@ from fakes import FixtureRestaurantResearcher, FixtureResearcher, ScriptedExtrac
 from langchain_core.messages import HumanMessage
 from langgraph.checkpoint.memory import InMemorySaver
 
-from itinerary_agent.domain import Activity, Restaurant
+from itinerary_agent.config import AllowedDomainsList, SourceCategory
+from itinerary_agent.domain import Activity, Location, Requirements, Restaurant
 from itinerary_agent.graph import build_graph
-from itinerary_agent.models import Location
-from itinerary_agent.requirements import Requirements
-from itinerary_agent.research import ActivityResearchResult
-from itinerary_agent.sources import AllowedDomainsList, SourceCategory
+from itinerary_agent.llm import ActivityResearchResult
 
 FIRST_MESSAGE = "We're headed to Paris and staying at Hotel Lutetia, just the two of us."
 SECOND_MESSAGE = "Budget is 2000, arriving CDG at 10:00, departing CDG at 18:00. No restaurant recommendations."

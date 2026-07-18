@@ -1,7 +1,7 @@
 from fakes import FakeLLMClient
 
-from itinerary_agent.extraction import LLMRequirementsExtractor
-from itinerary_agent.requirements import Requirements
+from itinerary_agent.domain import Requirements
+from itinerary_agent.llm import LLMRequirementsExtractor
 
 
 def test_extract_parses_valid_json_subset():

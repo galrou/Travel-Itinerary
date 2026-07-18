@@ -1,9 +1,8 @@
 from dataclasses import dataclass, field
 from typing import Sequence
 
-from itinerary_agent.domain import Restaurant
-from itinerary_agent.requirements import Requirements
-from itinerary_agent.research import ActivityResearchResult
+from itinerary_agent.domain import Requirements, Restaurant
+from itinerary_agent.llm import ActivityResearchResult
 
 
 @dataclass

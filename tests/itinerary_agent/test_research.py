@@ -1,6 +1,5 @@
-from itinerary_agent.domain import Activity
-from itinerary_agent.models import Location
-from itinerary_agent.research import filter_by_allowed_domains, select_top_activities
+from itinerary_agent.domain import Activity, Location
+from itinerary_agent.llm import filter_by_allowed_domains, select_top_activities
 
 ANYWHERE = Location(lat=0, lon=0)
 

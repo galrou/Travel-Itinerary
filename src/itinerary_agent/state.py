@@ -3,9 +3,7 @@ from typing import Annotated, TypedDict
 from langchain_core.messages import AnyMessage
 from langgraph.graph.message import add_messages
 
-from itinerary_agent.domain import Activity, Day, Restaurant, Trip
-from itinerary_agent.models import Location
-from itinerary_agent.requirements import Requirements
+from itinerary_agent.domain import Activity, Day, Location, Requirements, Restaurant, Trip
 
 
 class ConversationState(TypedDict):
